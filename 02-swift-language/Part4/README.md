@@ -16,11 +16,11 @@ This module explores advanced Swift programming concepts essential for building 
 
 ## 🎯 Learning Objectives
 
-* ✅ Master generics to write flexible, reusable functions and types that work with any data type
-* ✅ Use opaque and boxed protocol types to abstract complex implementations while preserving type safety
-* ✅ Understand ARC to manage memory efficiently and avoid retain cycles
-* ✅ Apply memory safety principles to prevent unsafe memory access and avoid memory leaks
-* ✅ Implement access control to define clear code boundaries and encapsulate logic securely
+* [x] Master generics to write flexible, reusable functions and types that work with any data type
+* [x] Use opaque and boxed protocol types to abstract complex implementations while preserving type safety
+* [x] Understand ARC to manage memory efficiently and avoid retain cycles
+* [x] Apply memory safety principles to prevent unsafe memory access and avoid memory leaks
+* [x] Implement access control to define clear code boundaries and encapsulate logic securely
 
 ---
 
