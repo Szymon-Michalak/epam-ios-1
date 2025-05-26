@@ -2,9 +2,6 @@
 
 This module introduces advanced Swift programming concepts fundamental to building robust and maintainable iOS applications. It covers handling optional values safely, structured error handling, type casting, and organizing code using nested types and subscripts. You'll also enhance code flexibility using extensions and protocols and explore powerful higher-order functions for transforming and aggregating collections.
 
-🗓️ **Start Date**: May 13, 2025  
-🗓️ **End Date**: June 5, 2025
-
 ---
 
 ## 🧠 Topics Covered
