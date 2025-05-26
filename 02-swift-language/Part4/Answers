@@ -1,0 +1,202 @@
+# Answers – Self-Control Questions (Swift Basics – Part 4)
+
+---
+
+## 💡 Generics
+
+**Q: What are generics in Swift and why are they useful?**
+Generics allow you to write reusable and type-safe code that works with any data type. They're used to reduce duplication and improve flexibility.
+
+**Q: How do you define a generic function in Swift?**
+
+```swift
+func swapValues<T>(_ a: inout T, _ b: inout T) {
+    let temp = a
+    a = b
+    b = temp
+}
+```
+
+**Q: Can you create a generic class or struct in Swift? How would you declare it?**
+Yes:
+
+```swift
+struct Stack<Element> {
+    var items: [Element] = []
+    mutating func push(_ item: Element) { items.append(item) }
+    mutating func pop() -> Element? { return items.popLast() }
+}
+```
+
+**Q: What are type constraints in generics? How do you use them?**
+They restrict types to conform to a protocol:
+
+```swift
+func findIndex<T: Equatable>(of value: T, in array: [T]) -> Int? { ... }
+```
+
+**Q: How do you apply generics with collections like Array or Dictionary?**
+Collections are generic types:
+
+```swift
+let names: [String] = []
+let userAges: [String: Int] = [:]
+```
+
+**Q: What is the difference between Any and AnyObject in the context of generics?**
+
+* `Any` can represent any type, including value and reference types.
+* `AnyObject` represents only class types.
+
+**Q: How does Swift’s associatedtype relate to generics and protocols?**
+`associatedtype` defines a placeholder type in protocols that’s specified by the conforming type — it's a generic inside a protocol.
+
+**Q: Can generics be used with protocols? If so, how?**
+Yes, using `associatedtype`, constraints, or wrapping protocols in generics.
+
+**Q: What are some real-world use cases where generics are especially beneficial?**
+Stacks, queues, data containers, reusable functions like `map`, `filter`, `reduce`, and network abstraction layers.
+
+---
+
+## 🔍 Opaque and Boxed Protocol Types
+
+**Q: What are opaque types in Swift? How are they declared?**
+They hide the concrete return type using `some`, e.g. `func make() -> some View`.
+
+**Q: How do opaque types differ from generics?**
+Generics are chosen by the caller; opaque types are chosen by the implementer.
+
+**Q: What does the `some` keyword represent in Swift?**
+It means "a specific but hidden type that conforms to a protocol".
+
+**Q: What is a boxed type?**
+A boxed (existential) type allows storing any type conforming to a protocol using `any`, e.g. `any Hashable`.
+
+**Q: How do you work with boxed protocol types in Swift?**
+You use them via dynamic dispatch. You can't access associated types or use them in generics.
+
+**Q: When would you use an opaque return type instead of a generic return type?**
+When you want to hide implementation details but ensure strong type safety.
+
+**Q: What are the benefits of using opaque types for abstraction?**
+Type safety, performance, and clear API boundaries.
+
+**Q: How do you handle type erasure when working with boxed types?**
+You wrap the protocol in a concrete box class or use `any` and manually forward calls.
+
+**Q: Can you create your own custom opaque or boxed type in Swift? If so, how?**
+Yes. For example, use `some Protocol` in function return types, or use `AnyView`, `AnyPublisher` as boxed types.
+
+---
+
+## 🧪 ARC (Automatic Reference Counting)
+
+**Q: What is ARC in Swift? How does it work?**
+ARC automatically manages memory by keeping a reference count to class instances. When count hits 0, memory is deallocated.
+
+**Q: What is the difference between strong, weak, and unowned references?**
+
+* `strong`: default, increases reference count.
+* `weak`: doesn’t retain, can be `nil`.
+* `unowned`: doesn’t retain, assumes reference is always valid.
+
+**Q: How does ARC manage memory and prevent leaks?**
+By deallocating objects with zero strong references. Developers must prevent retain cycles.
+
+**Q: What is a retain cycle, and how do you avoid it?**
+A retain cycle is when two instances strongly reference each other, preventing deallocation. Break it using `weak` or `unowned`.
+
+**Q: What happens when an object is deallocated in ARC?**
+Its `deinit` is called, memory is released.
+
+**Q: How does ARC handle closures? How can it lead to memory cycles?**
+Closures capture `self` strongly by default, causing cycles. Use `[weak self]` or `[unowned self]`.
+
+**Q: How do you break a retain cycle in closures?**
+Use capture lists:
+
+```swift
+[weak self] in self?.doSomething()
+```
+
+**Q: Real-world ARC importance?**
+Common in view controllers, delegates, network calls, and closures — avoiding leaks is critical on iOS.
+
+---
+
+## ⚖️ Memory Safety
+
+**Q: What is memory safety in Swift and why is it important?**
+It prevents simultaneous access to the same memory location. Ensures safe execution and avoids crashes.
+
+**Q: How does Swift ensure memory safety at compile time?**
+It enforces exclusive access to memory and detects simultaneous read/write conflicts.
+
+**Q: What is exclusive access to memory?**
+Only one piece of code can read/write to a memory location at a time.
+
+**Q: What happens if a variable is accessed simultaneously for reading and writing?**
+Swift throws a compile-time error.
+
+**Q: How does Swift handle inout parameters in terms of memory safety?**
+They follow exclusive access rules and can’t be passed from/to the same memory.
+
+**Q: What is the difference between private and fileprivate memory access?**
+Unrelated. Those are access control levels, not memory rules.
+
+**Q: Can you access the same variable in two places at once?**
+Only if both are read-only. Otherwise, Swift forbids it.
+
+**Q: What are `UnsafePointer` types and when should you use them?**
+They allow direct memory access. Use them only in performance-critical or system-level tasks.
+
+**Q: How can you work with unsafe code safely?**
+Encapsulate it, validate memory, avoid aliasing, and isolate from main logic.
+
+**Q: Why is memory safety important in mobile apps?**
+Limited memory, stability, and user trust depend on safe memory use.
+
+---
+
+## 🔐 Access Control
+
+**Q: What are access control levels in Swift?**
+`private`, `fileprivate`, `internal`, `public`, `open`
+
+**Q: What is the default access level if none is specified?**
+`internal`
+
+**Q: How do you define access levels?**
+
+```swift
+private var name: String
+public func greet() {}
+```
+
+**Q: How does `public` differ from `open`?**
+
+* `public`: usable in other modules but not subclassable
+* `open`: usable and subclassable outside the module
+
+**Q: Can you override methods of a `public` class in another module?**
+No. Only `open` classes allow that.
+
+**Q: How do access control rules apply to extensions?**
+The extension can't declare a higher access level than the type it extends.
+
+**Q: Can an extension declare a higher access level than the type itself?**
+No. The maximum level is limited by the type’s access level.
+
+**Q: Why should you use `private` access in your code?**
+To encapsulate internal logic and reduce accidental usage.
+
+**Q: When would you use `fileprivate` over `private`?**
+When multiple types in the same file need shared access.
+
+**Q: How does access control help modularity and security?**
+It hides internal logic, prevents misuse, and enforces boundaries across modules.
+
+---
+
+*End of answers for Part 4.*
