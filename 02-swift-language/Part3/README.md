@@ -2,9 +2,6 @@
 
 This module introduces advanced Swift programming concepts fundamental to building robust and maintainable iOS applications. It covers handling optional values safely, structured error handling, type casting, and organizing code using nested types and subscripts. You'll also enhance code flexibility using extensions and protocols and explore powerful higher-order functions for transforming and aggregating collections.
 
-🗓️ **Start Date**: May 13, 2025  
-🗓️ **End Date**: June 5, 2025
-
 ---
 
 ## 🧠 Topics Covered
@@ -24,15 +21,15 @@ This module introduces advanced Swift programming concepts fundamental to buildi
 
 By the end of this module, you should be able to:
 
-- ✅ Master optional types and techniques for safely unwrapping them
-- ✅ Apply optional chaining for cleaner access to optional properties and methods
-- ✅ Handle errors using `try`, `catch`, `throw`, and optional error propagation
-- ✅ Use type casting to safely convert types within a class hierarchy
-- ✅ Organize related types with nested type declarations
-- ✅ Define and use subscripts to access data elements directly
-- ✅ Extend types with new behavior using extensions and protocol extensions
-- ✅ Build reusable and flexible APIs using protocols and associated types
-- ✅ Transform data collections with higher-order functions (`map`, `flatMap`, etc.)
+- [x] Master optional types and techniques for safely unwrapping them
+- [x] Apply optional chaining for cleaner access to optional properties and methods
+- [x] Handle errors using `try`, `catch`, `throw`, and optional error propagation
+- [x] Use type casting to safely convert types within a class hierarchy
+- [x] Organize related types with nested type declarations
+- [x] Define and use subscripts to access data elements directly
+- [x] Extend types with new behavior using extensions and protocol extensions
+- [x] Build reusable and flexible APIs using protocols and associated types
+- [x] Transform data collections with higher-order functions (`map`, `flatMap`, etc.)
 
 ---
 

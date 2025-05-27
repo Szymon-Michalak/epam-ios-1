@@ -2,9 +2,6 @@
 
 This module explores advanced Swift programming concepts essential for building robust and scalable iOS applications. It covers generics, abstraction using opaque and boxed protocol types, efficient memory management through ARC and memory safety, and secure encapsulation using access control.
 
-🗓️ **Start Date**: May 13, 2025
-🗓️ **End Date**: June 5, 2025
-
 ---
 
 ## 🔍 Topics Covered
@@ -19,11 +16,11 @@ This module explores advanced Swift programming concepts essential for building 
 
 ## 🎯 Learning Objectives
 
-* ✅ Master generics to write flexible, reusable functions and types that work with any data type
-* ✅ Use opaque and boxed protocol types to abstract complex implementations while preserving type safety
-* ✅ Understand ARC to manage memory efficiently and avoid retain cycles
-* ✅ Apply memory safety principles to prevent unsafe memory access and avoid memory leaks
-* ✅ Implement access control to define clear code boundaries and encapsulate logic securely
+* [x] Master generics to write flexible, reusable functions and types that work with any data type
+* [x] Use opaque and boxed protocol types to abstract complex implementations while preserving type safety
+* [x] Understand ARC to manage memory efficiently and avoid retain cycles
+* [x] Apply memory safety principles to prevent unsafe memory access and avoid memory leaks
+* [x] Implement access control to define clear code boundaries and encapsulate logic securely
 
 ---
 
