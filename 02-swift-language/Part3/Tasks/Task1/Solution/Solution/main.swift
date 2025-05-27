@@ -47,12 +47,12 @@
 
 import Foundation
 
-protocol Borrowable {
-    var borrowDate: Date? {get set}
-    var returnDate: Date? {get set}
-    var isBorrowed: Bool {get set}
+protocol Borrowable: AnyObject {
+    var borrowDate: Date? { get set }
+    var returnDate: Date? { get set }
+    var isBorrowed: Bool { get set }
 
-    mutating func checkIn()
+    func checkIn()
 }
 
 extension Borrowable {
@@ -61,7 +61,7 @@ extension Borrowable {
         return returnDate.timeIntervalSinceNow < 0
     }
 
-    mutating func checkIn() {
+    func checkIn() {
         borrowDate = nil
         returnDate = nil
         isBorrowed = false
@@ -84,13 +84,6 @@ class Book: Item, Borrowable {
     var borrowDate: Date?
     var returnDate: Date?
     var isBorrowed: Bool = false
-
-    init(id: String, title: String, author: String, borrowDate: Date? = nil, returnDate: Date? = nil, isBorrowed: Bool) {
-        self.borrowDate = borrowDate
-        self.returnDate = returnDate
-        self.isBorrowed = isBorrowed
-        super.init(id: id, title: title, author: author)
-    }
 }
 
 enum LibraryError: Error {
@@ -117,30 +110,25 @@ class Library {
         guard let item = items[id] else {
             throw .itemNotFound
         }
-        // Optional chaining feels clumsy here
-        if let isBorrowed = (item as? Borrowable)?.isBorrowed {
-            if isBorrowed {
-                throw .alreadyBorrowed
-            }
-        } else {
+        guard var borrowable = item as? Borrowable else {
             throw .itemNotBorrowable
         }
-
-        if let borrowable = item as? Borrowable {
-            var mutable = borrowable
-            mutable.isBorrowed = true
-            mutable.borrowDate = Date()
-            mutable.returnDate = Calendar.current.date(byAdding: .day, value: 14, to: Date())
+        if borrowable.isBorrowed {
+            throw .alreadyBorrowed
         }
+
+        borrowable.isBorrowed = true
+        borrowable.borrowDate = Date()
+        borrowable.returnDate = Calendar.current.date(byAdding: .day, value: 14, to: Date())
 
         return item
     }
 }
 
 // Create a few books
-let book1 = Book(id: "001", title: "1984", author: "George Orwell", isBorrowed: false)
-let book2 = Book(id: "002", title: "Brave New World", author: "Aldous Huxley", isBorrowed: false)
-let book3 = Book(id: "003", title: "Fahrenheit 451", author: "Ray Bradbury", isBorrowed: true) // already borrowed
+let book1 = Book(id: "001", title: "1984", author: "George Orwell")
+let book2 = Book(id: "002", title: "Brave New World", author: "Aldous Huxley")
+let book3 = Book(id: "003", title: "Fahrenheit 451", author: "Ray Bradbury")
 
 // Initialize library
 let library = Library(items: [:])
@@ -175,7 +163,7 @@ do {
 }
 
 // Create a book and library
-let book = Book(id: "007", title: "The Pragmatic Programmer", author: "Andy Hunt", isBorrowed: false)
+let book = Book(id: "007", title: "The Pragmatic Programmer", author: "Andy Hunt")
 let library2 = Library(items: [:])
 library2.addBook(book)
 
