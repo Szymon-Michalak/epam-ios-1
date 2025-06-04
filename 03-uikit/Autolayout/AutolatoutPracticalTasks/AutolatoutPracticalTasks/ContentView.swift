@@ -48,7 +48,7 @@ struct AsSwiftUIView: UIViewControllerRepresentable {
         self.make = make
     }
     
-    func makeUIViewController(context: Context) -> some UIViewController {
+    func makeUIViewController(context: Context) -> UIViewController {
         make()
     }
     
